@@ -1,21 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/calculator.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="공학용 계산기 웹앱" />
     <title>공학용 계산기</title>
-    <script>
-      // 초기 다크 모드 설정 (페이지 로드 시 깜빡임 방지)
-      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const savedTheme = localStorage.getItem('theme');
-      
-      if (savedTheme === 'dark' || (!savedTheme && prefersDarkMode)) {
-        document.documentElement.classList.add('dark-mode');
-      } else {
-        document.documentElement.classList.remove('dark-mode');
-      }
-    </script>
   </head>
   <body>
     <div id="root"></div>

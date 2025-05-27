@@ -1,85 +1,114 @@
-import { createSystem, defaultConfig } from '@chakra-ui/react';
+import { extendTheme, type ThemeConfig } from '@chakra-ui/react';
 
-// 테마 확장
-export const system = createSystem(defaultConfig, {
-  theme: {
-    tokens: {
-      colors: {
-        brand: {
-          50: { value: '#e3f2fd' },
-          100: { value: '#bbdefb' },
-          200: { value: '#90caf9' },
-          300: { value: '#64b5f6' },
-          400: { value: '#42a5f5' },
-          500: { value: '#2196f3' }, // 주 색상
-          600: { value: '#1e88e5' },
-          700: { value: '#1976d2' },
-          800: { value: '#1565c0' },
-          900: { value: '#0d47a1' },
-        },
-        success: {
-          500: { value: '#4caf50' },
-        },
-        warning: {
-          500: { value: '#ff9800' },
-        },
+// 색상 모드 설정 (다크/라이트 모드)
+const config: ThemeConfig = {
+  initialColorMode: 'light',
+  useSystemColorMode: true,
+};
+
+// 계산기 테마 색상 및 스타일 정의
+const theme = extendTheme({
+  config,
+  colors: {
+    calculator: {
+      display: {
+        light: '#f0f0f0',
+        dark: '#2d3748',
       },
-    },
-    config: {
-      initialColorMode: 'light',
-      useSystemColorMode: true,
-    },
-    components: {
-      Button: {
-        baseStyle: {
-          borderRadius: 'md',
-          fontWeight: 'normal',
-        },
-        variants: {
-          solid: {
-            bg: 'brand.500',
-            color: 'white',
-            _hover: {
-              bg: 'brand.600',
-            },
-            _dark: {
-              bg: 'brand.600',
-              _hover: {
-                bg: 'brand.700',
-              },
-            },
+      button: {
+        number: {
+          bg: {
+            light: '#e2e8f0',
+            dark: '#4a5568',
           },
-          outline: {
-            border: '1px solid',
-            borderColor: 'brand.500',
-            color: 'brand.500',
-            _dark: {
-              borderColor: 'brand.600',
-              color: 'brand.600',
-            },
-          },
-          ghost: {
-            color: 'brand.500',
-            _dark: {
-              color: 'brand.600',
-            },
+          hover: {
+            light: '#cbd5e0',
+            dark: '#2d3748',
           },
         },
-      },
-    },
-    styles: {
-      global: {
-        body: {
-          bg: 'white',
-          color: 'gray.800',
-          _dark: {
-            bg: 'gray.800',
-            color: 'white',
+        operation: {
+          bg: {
+            light: '#e6fffa',
+            dark: '#285e61',
+          },
+          hover: {
+            light: '#b2f5ea',
+            dark: '#234e52',
+          },
+        },
+        function: {
+          bg: {
+            light: '#ebf4ff',
+            dark: '#2c5282',
+          },
+          hover: {
+            light: '#bee3f8',
+            dark: '#2a4365',
+          },
+        },
+        equal: {
+          bg: {
+            light: '#fed7d7',
+            dark: '#822727',
+          },
+          hover: {
+            light: '#feb2b2',
+            dark: '#63171b',
           },
         },
       },
     },
   },
+  components: {
+    Button: {
+      baseStyle: {
+        fontWeight: 'normal',
+        borderRadius: 'md',
+      },
+      variants: {
+        calculatorNumber: props => ({
+          bg: props.colorMode === 'dark' 
+            ? 'calculator.button.number.bg.dark' 
+            : 'calculator.button.number.bg.light',
+          _hover: {
+            bg: props.colorMode === 'dark' 
+              ? 'calculator.button.number.hover.dark' 
+              : 'calculator.button.number.hover.light',
+          },
+        }),
+        calculatorOperation: props => ({
+          bg: props.colorMode === 'dark' 
+            ? 'calculator.button.operation.bg.dark' 
+            : 'calculator.button.operation.bg.light',
+          _hover: {
+            bg: props.colorMode === 'dark' 
+              ? 'calculator.button.operation.hover.dark' 
+              : 'calculator.button.operation.hover.light',
+          },
+        }),
+        calculatorFunction: props => ({
+          bg: props.colorMode === 'dark' 
+            ? 'calculator.button.function.bg.dark' 
+            : 'calculator.button.function.bg.light',
+          _hover: {
+            bg: props.colorMode === 'dark' 
+              ? 'calculator.button.function.hover.dark' 
+              : 'calculator.button.function.hover.light',
+          },
+        }),
+        calculatorEqual: props => ({
+          bg: props.colorMode === 'dark' 
+            ? 'calculator.button.equal.bg.dark' 
+            : 'calculator.button.equal.bg.light',
+          _hover: {
+            bg: props.colorMode === 'dark' 
+              ? 'calculator.button.equal.hover.dark' 
+              : 'calculator.button.equal.hover.light',
+          },
+        }),
+      },
+    },
+  },
 });
 
-export default system;
+export default theme;
