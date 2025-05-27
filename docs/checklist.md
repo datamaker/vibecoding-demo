@@ -38,13 +38,13 @@
 
 ## 3. 유스케이스 (Usecases) 구현
 
-- [ ] CalculateExpression 유스케이스 구현
+- [x] CalculateExpression 유스케이스 구현
   - 테스트 작성
   - 인터페이스 구현
   - 구체 클래스 구현
   - **커밋**: "CalculateExpression 유스케이스 구현"
 
-- [ ] ManageHistory 유스케이스 구현
+- [x] ManageHistory 유스케이스 구현
   - 테스트 작성
   - 인터페이스 구현
   - 구체 클래스 구현
@@ -52,7 +52,7 @@
 
 ## 4. 어댑터 (Adapters) 구현
 
-- [ ] MathJsAdapter 구현
+- [x] MathJsAdapter 구현
   - 테스트 작성
   - MathJsExpression 클래스 구현
   - **커밋**: "MathJsAdapter 구현"
