@@ -1,6 +1,13 @@
 import React from 'react';
-import { Button, Grid, useColorMode } from '@chakra-ui/react';
+import { Button, Grid, useColorMode, useBreakpointValue } from '@chakra-ui/react';
 import { useCalculatorContext } from '@frameworks/state/calculatorContext';
+
+/**
+ * 키패드 컴포넌트 인터페이스
+ */
+interface KeypadProps {
+  onButtonClick: (value: string) => void;
+}
 
 /**
  * 계산기의 키패드 컴포넌트
@@ -8,12 +15,17 @@ import { useCalculatorContext } from '@frameworks/state/calculatorContext';
  * 이 컴포넌트는 계산기의 키패드를 제공합니다.
  * 일반 모드와 공학용 모드에 따라 다른 키패드를 표시합니다.
  */
-export const Keypad: React.FC<{
-  onButtonClick: (value: string) => void;
-}> = ({ onButtonClick }) => {
+export const Keypad: React.FC<KeypadProps> = ({ onButtonClick }) => {
   const { colorMode } = useColorMode();
   const { state } = useCalculatorContext();
   const { isEngineeringMode } = state;
+  
+  // 반응형 디자인을 위한 브레이크포인트 값
+  const buttonSize = useBreakpointValue({ base: 'sm', md: 'md', lg: 'lg' });
+  const buttonHeight = useBreakpointValue({ base: '2.5rem', md: '3rem', lg: '3.5rem' });
+  const fontSize = useBreakpointValue({ base: 'md', md: 'lg', lg: 'xl' });
+  const gap = useBreakpointValue({ base: 1, md: 2, lg: 3 });
+  const borderRadius = useBreakpointValue({ base: 'md', md: 'lg', lg: 'xl' });
 
   // 기본 키패드 버튼 정의
   const basicButtons = [
@@ -58,30 +70,74 @@ export const Keypad: React.FC<{
   return (
     <>
       {isEngineeringMode && (
-        <Grid templateColumns="repeat(4, 1fr)" gap={2} mb={4}>
+        <Grid templateColumns="repeat(4, 1fr)" gap={gap} mb={4}>
           {engineeringButtons.map((button) => (
             <Button
               key={button.value}
               onClick={() => onButtonClick(button.value)}
               variant={button.variant as any}
-              size="md"
-              h="3rem"
-              fontSize="lg"
+              size={buttonSize}
+              h={buttonHeight}
+              fontSize={fontSize}
+              borderRadius={borderRadius}
+              _hover={{
+                transform: 'scale(1.05)',
+                transition: 'transform 0.2s'
+              }}
+              _active={{
+                transform: 'scale(0.95)',
+                transition: 'transform 0.1s'
+              }}
+              transition="all 0.2s"
+              boxShadow="md"
+              bg={colorMode === 'dark' ? 
+                `${button.variant === 'calculatorNumber' ? 'gray.600' : 
+                  button.variant === 'calculatorOperation' ? 'teal.700' : 
+                  button.variant === 'calculatorFunction' ? 'blue.700' : 
+                  button.variant === 'calculatorEqual' ? 'red.700' : 'gray.600'}`
+                : 
+                `${button.variant === 'calculatorNumber' ? 'gray.100' : 
+                  button.variant === 'calculatorOperation' ? 'teal.100' : 
+                  button.variant === 'calculatorFunction' ? 'blue.100' : 
+                  button.variant === 'calculatorEqual' ? 'red.100' : 'gray.100'}`
+              }
             >
               {button.label}
             </Button>
           ))}
         </Grid>
       )}
-      <Grid templateColumns="repeat(4, 1fr)" gap={2}>
+      <Grid templateColumns="repeat(4, 1fr)" gap={gap}>
         {basicButtons.map((button) => (
           <Button
             key={button.value}
             onClick={() => onButtonClick(button.value)}
             variant={button.variant as any}
-            size="md"
-            h="3rem"
-            fontSize="lg"
+            size={buttonSize}
+            h={buttonHeight}
+            fontSize={fontSize}
+            borderRadius={borderRadius}
+            _hover={{
+              transform: 'scale(1.05)',
+              transition: 'transform 0.2s'
+            }}
+            _active={{
+              transform: 'scale(0.95)',
+              transition: 'transform 0.1s'
+            }}
+            transition="all 0.2s"
+            boxShadow="md"
+            bg={colorMode === 'dark' ? 
+              `${button.variant === 'calculatorNumber' ? 'gray.600' : 
+                button.variant === 'calculatorOperation' ? 'teal.700' : 
+                button.variant === 'calculatorFunction' ? 'blue.700' : 
+                button.variant === 'calculatorEqual' ? 'red.700' : 'gray.600'}`
+              : 
+              `${button.variant === 'calculatorNumber' ? 'gray.100' : 
+                button.variant === 'calculatorOperation' ? 'teal.100' : 
+                button.variant === 'calculatorFunction' ? 'blue.100' : 
+                button.variant === 'calculatorEqual' ? 'red.100' : 'gray.100'}`
+            }
           >
             {button.label}
           </Button>

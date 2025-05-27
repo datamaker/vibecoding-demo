@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { CalculateExpressionUseCase } from '../CalculateExpression';
-import { Expression } from '@entities/Expression';
-import { CalculationResult } from '@entities/CalculationResult';
+import { Expression } from '../../entities/Expression';
+import { CalculationResult } from '../../entities/CalculationResult';
 
 // 테스트용 Expression 구현체
 class TestExpression implements Expression {
