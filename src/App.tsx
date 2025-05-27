@@ -1,18 +1,18 @@
-import { Box, Center, Heading, VStack } from '@chakra-ui/react';
+import React from 'react';
+import { CalculatorProvider } from '@frameworks/state/calculatorContext';
+import Calculator from '@frameworks/ui/components/Calculator';
 
+/**
+ * 앱의 루트 컴포넌트
+ * 
+ * 이 컴포넌트는 계산기 앱의 진입점입니다.
+ * 상태 관리 프로바이더를 설정하고 메인 계산기 컴포넌트를 렌더링합니다.
+ */
 function App() {
   return (
-    <Box minH="100vh" p={4}>
-      <Center>
-        <VStack spacing={8}>
-          <Heading as="h1" size="xl">공학용 계산기</Heading>
-          <Box>
-            {/* 계산기 컴포넌트가 여기에 추가될 예정입니다 */}
-            <Heading as="h2" size="md">구현 중...</Heading>
-          </Box>
-        </VStack>
-      </Center>
-    </Box>
+    <CalculatorProvider>
+      <Calculator />
+    </CalculatorProvider>
   );
 }
 
